@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+  <contextName>logdemo</contextName>
+  <property name="path" value="D:\\_GitCode\\Project\\inothLog"/>
+
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="info_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${path}/InothA/info/logdemo.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${path}/InothA/info/%d{yyyy-MM-dd}/logdemo.%i.log</fileNamePattern>
+      <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <MaxFileSize>10MB</MaxFileSize>
+      </TimeBasedFileNamingAndTriggeringPolicy>
+      <totalSizeCap>2GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>INFO</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <appender name="error_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${path}/InothA/error/logdemo.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${path}/InothA/error/%d{yyyy-MM-dd}/logdemo.%i.log</fileNamePattern>
+      <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <MaxFileSize>10MB</MaxFileSize>
+      </TimeBasedFileNamingAndTriggeringPolicy>
+      <totalSizeCap>2GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <root level="error">
+    <appender-ref ref="console"/>
+    <!--<appender-ref ref="info_file"/>-->
+  </root>
+
+  <logger name="INOTHA" level="INFO" additivity="false">
+    <appender-ref ref="info_file"/>
+    <appender-ref ref="error_file"/>
+  </logger>
+
+</configuration>

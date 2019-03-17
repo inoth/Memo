@@ -12,7 +12,7 @@ class LyricSpider(scrapy.Spider):
 
     def start_requests(self):
         # https://utaten.com/search/=/sort=popular_sort%3Aasc/artist_name={name}/title={title}/beginning=/body=/lyricist=/composer=/sub_title=/form_open=1/show_artists=1/
-        data = {'米津': "loser"}
+        data = {'米津': "flamingo"}
 
         for k,v in data.items():
             yield scrapy.Request(f'https://utaten.com/search/=/sort=popular_sort%3Aasc/artist_name={k}/title={v}/beginning=/body=/lyricist=/composer=/sub_title=/form_open=1/show_artists=1/', callback=self.parse)
