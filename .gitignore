@@ -3,3 +3,5 @@
 bin
 obj
 *.Development.json
+go.sum
+*.pyc
