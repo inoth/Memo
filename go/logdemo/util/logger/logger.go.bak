@@ -1,0 +1,85 @@
+// package logger
+
+// import (
+// 	"fmt"
+// 	"math/rand"
+// 	"sync"
+// 	"time"
+
+// 	"github.com/weekface/mgorus"
+
+// 	"github.com/sirupsen/logrus"
+// )
+
+// // type SingleLog struct {
+// // 	log *logrus.Entry
+// // }
+
+// var (
+// 	logger *logrus.Entry
+// 	log    *logrus.Logger
+// 	once   sync.Once
+// 	// singleLog *SingleLog
+// )
+
+// // func Instance() *SingleLog {
+// // 	once.Do(func() {
+// // 		singleLog = &SingleLog{}
+// // 	})
+// // 	return singleLog
+// // }
+
+// func InitLogger() *logrus.Logger {
+// 	once.Do(func() {
+// 		log := logrus.New()
+// 		hooker, err := mgorus.NewHookerWithAuth("192.168.138.138:27017", "logger", "collection", "logger", "inoth/*-+")
+// 		if err == nil {
+// 			log.Hooks.Add(hooker)
+// 		} else {
+// 			println(err)
+// 		}
+// 	})
+// 	return log
+// 	// log.SetFormatter(&logrus.JSONFormatter{})
+// 	// log.SetOutput(os.Stdout)
+// }
+
+// // func (l *SingleLog) getLog() *logrus.Entry {
+// // 	return log
+// // }
+
+// func InitRequestID() {
+// 	logger = InitLogger().WithFields(logrus.Fields{"rid": random()})
+// }
+
+// func Info(args ...interface{}) {
+// 	logger.Info(args)
+// }
+// func Error(args ...interface{}) {
+// 	logger.Error(args)
+// }
+// func Warn(args ...interface{}) {
+// 	logger.Warn(args)
+// }
+
+// // func Fatal(args ...interface{}) {
+// // 	logger.Fatal(args)
+// // }
+// func Infof(format string, args ...interface{}) {
+// 	logger.Infof(format, args)
+// }
+// func Errorf(format string, args ...interface{}) {
+// 	logger.Errorf(format, args)
+// }
+// func Warnf(format string, args ...interface{}) {
+// 	logger.Warnf(format, args)
+// }
+
+// // func Fatalf(format string, args ...interface{}) {
+// // 	logger.Fatalf(format, args)
+// // }
+
+// func random() string {
+// 	rand.Seed(time.Now().Unix())
+// 	return fmt.Sprintf("%07v", rand.Int31n(1000000))
+// }

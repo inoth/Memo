@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="inoth.webapi.Mapper.IBannerMapper">
+  <resultMap id="banner_resultMap" type="Banner">
+    <result column="TIT_ID" property="titid" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+    <result column="TIT_MSG" property="titmsg" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result column="IMG_URL" property="imgurl" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result column="STATE" property="state" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+    <result column="SCR_URL" property="scrurl" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result column="SORT" property="sort" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+    <result column="PAGE_NO" property="pageno" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+  </resultMap>
+  <select id="QueryAll" resultMap="banner_resultMap">
+    select t.* from banner_list t
+  </select>
+  <select id="getBannerByPage" resultMap="banner_resultMap">
+    select t.* from banner_list t where t.page_No = #{pageNo} and t.state = 0
+  </select>
+</mapper>
