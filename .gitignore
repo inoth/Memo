@@ -1,7 +1,0 @@
-*/.vscode/
-.vscode
-bin
-obj
-*.Development.json
-go.sum
-*.pyc

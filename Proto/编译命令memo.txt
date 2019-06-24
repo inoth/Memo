@@ -1,5 +1,0 @@
-protoc -I=$SRC_DIR --csharp_out=$DST_DIR $SRC_DIR/demo.proto
-
-$SRC_DIR: proto 文件目录 [引用其他该文件需要用到]
-$DST_DIR: 编译文件输出目录
-
