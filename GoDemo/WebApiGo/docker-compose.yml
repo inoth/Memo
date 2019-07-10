@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  webapigo:
+    image: webapigo
+    build: .
+    ports:
+      - 7777:7777
