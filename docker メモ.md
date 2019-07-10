@@ -21,7 +21,7 @@ ENTRYPOINT ["xxxx","xxxx"]
 
 
 ### go build linux use file
-SET CGO_ENABLED=0
-SET GOOS=linux
-SET GOARCH=amd64
-go build xxxx.go
+SET CGO_ENABLED=0 <br/>
+SET GOOS=linux <br/>
+SET GOARCH=amd64 <br/>
+go build xxxx.go <br/>
