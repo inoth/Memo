@@ -17,3 +17,11 @@ FORM image AS xxx <br/>
 RUN cmd
 // 执行
 ENTRYPOINT ["xxxx","xxxx"]
+
+
+
+### go build linux use file
+SET CGO_ENABLED=0
+SET GOOS=linux
+SET GOARCH=amd64
+go build xxxx.go
