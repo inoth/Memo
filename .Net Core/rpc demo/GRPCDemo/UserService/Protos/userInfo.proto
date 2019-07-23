@@ -1,0 +1,14 @@
+syntax = "proto3";
+option csharp_namespace = "UserService";
+
+package UserInfo;
+
+service Persona {
+    rpc QueryUser (UserInfo) returns (UserInfo);
+}
+
+message UserInfo {
+    int32 id = 1;
+    string name = 2;
+    string gmail = 3;
+}
