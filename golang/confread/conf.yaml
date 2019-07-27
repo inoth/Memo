@@ -1,0 +1,8 @@
+Cache:
+  nodes: xxx,xxx,xxx,xxx,xx,xx
+Db:
+  user: inoth
+  pwd: '123456'
+  host: xxx.xxx.xxx.xxx
+  port: '9999'
+  name: logger

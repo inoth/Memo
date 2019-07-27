@@ -1,0 +1,12 @@
+Cache:
+  nodes: xxxx
+DB:
+  MySql:
+    Connect: xxxxx
+  Mongo:
+    DbName: logger
+    User: logger
+    Pwd: inoth/*-+
+    Host: 192.168.138.138:27017
+    TabName: apiSample
+ServerPort: :7777
