@@ -12,7 +12,7 @@ namespace RPCClient
         {
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             var http = new HttpClient();
-            http.BaseAddress = new Uri("http://localhost:50010");
+            http.BaseAddress = new Uri("http://localhost:50051");
 
             var client = GrpcClient.Create<Persona.PersonaClient>(http);
             var r = await client.QueryUserAsync(new UserInfo

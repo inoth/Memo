@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="tentative.normal.mapper.ConfigMapperInterface">
+    <resultMap id="account_result" type="UserInfo">
+        <!-- <result column="ACCOUNT_TYPE" property="accountType" javaType="java.lang.Integer" jdbcType="NUMERIC"/>-->
+    </resultMap>
+    <select id="Query" resultMap="account_result">
+        select * from TABLE_NAME
+    </select>
+</mapper>
