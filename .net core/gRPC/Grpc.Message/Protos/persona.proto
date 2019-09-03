@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "Grpc.Message";
+
+package UserInfo;
+
+service PersonaService {
+    rpc Query (UserInfo) returns (UserInfo);
+    rpc QueryList (UserInfo) returns (UserList);
+    rpc SayHi (UserInfo) returns (UserMsg);
+}
+
+message UserInfo {
+    int32 id = 1;
+    string name = 2;
+    string gmail = 3;
+}
+
+message UserList {
+    repeated UserInfo item = 1;
+}
+
+message UserMsg {
+	string msg = 1;
+}

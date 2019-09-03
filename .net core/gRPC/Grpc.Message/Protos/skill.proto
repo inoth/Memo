@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "Grpc.Message";
+
+package UserInfo;
+
+service SkillService {
+    rpc Query (SkillInfo) returns (SkillInfo);
+}
+
+message SkillInfo {
+    int32 id = 1;
+    int32 owner = 2;
+    string skName = 3;
+    string skDesc = 4;
+}

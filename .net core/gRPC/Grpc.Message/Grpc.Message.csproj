@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Protobuf_NoWarnMissingExpected>true</Protobuf_NoWarnMissingExpected>
+    <!--<EnableDefaultCompileItems>false</EnableDefaultCompileItems>-->
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Protos\persona.proto" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.9.1" />
+    <PackageReference Include="Grpc" Version="2.23.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.23.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup> 
+
+  <ItemGroup>
+    <Protobuf Include="Protos\*.proto" GrpcServices="Both" OutputDir="Generate" CompileOutputs="false" />
+    <!--<Protobuf Include="Protos/*.proto" OutputDir="%(RelativePath)" CompileOutputs="false" />
+    <Protobuf Update="**/hello/*.proto;**/bye/*.proto" GrpcServices="Both" />-->
+  </ItemGroup> 
+  
+</Project>
