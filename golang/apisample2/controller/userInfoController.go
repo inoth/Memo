@@ -24,5 +24,6 @@ func QueryUserList(c *gin.Context) error {
 }
 
 func SelfError(c *gin.Context) error {
+	println("控制器输出：" + c.Param("id"))
 	return ex.ParamErrorException("参数错误")
 }
