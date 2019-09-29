@@ -3,6 +3,7 @@ package router
 import (
 	"apisample/controller"
 	ex "apisample/controller/exceptionHandler"
+	mid "apisample/controller/middleware"
 	"apisample/util"
 	"strings"
 
@@ -13,12 +14,18 @@ import (
 func InitRouter() *gin.Engine {
 	r := gin.New()
 
+	// 全局异常处理使用第一个中间件
+	// r.Use(mid.ExceptionHandle)
+
+	r.Use(mid.LoggerInit)
+
 	api := r.Group("/api")
 	api.GET("/user", wrapper(controller.QueryUserList))
 	api.GET("/error/:id", wrapper(controller.SelfError))
 	return r
 }
 
+// 无法捕获中间件的异常
 func wrapper(handler gin.HandlerFunc) gin.HandlerFunc {
 
 	return func(c *gin.Context) {
