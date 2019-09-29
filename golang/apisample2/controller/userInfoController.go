@@ -7,9 +7,10 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
-func QueryUserList(c *gin.Context) error {
+func QueryUserList(c *gin.Context) {
 
 	// c.JSON(http.StatusOK, gin.H{"name": "inoth"})
 
@@ -20,10 +21,9 @@ func QueryUserList(c *gin.Context) error {
 
 	c.JSON(http.StatusOK, user)
 
-	return nil
 }
 
-func SelfError(c *gin.Context) error {
-	println("控制器输出：" + c.Param("id"))
-	return ex.ParamErrorException("参数错误")
+func SelfError(c *gin.Context) {
+	logrus.Info("控制器输出")
+	panic(ex.ParamErrorException("参数错误"))
 }

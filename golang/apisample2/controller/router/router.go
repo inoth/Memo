@@ -7,25 +7,26 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
 func InitRouter() *gin.Engine {
 	r := gin.New()
 
 	api := r.Group("/api")
-	api.GET("/user", Wrapper(controller.QueryUserList))
-	api.GET("/error/:id", Wrapper(controller.SelfError))
+	api.GET("/user", wrapper(controller.QueryUserList))
+	api.GET("/error/:id", wrapper(controller.SelfError))
 	return r
 }
 
-func Wrapper(handler ex.HandlerFunc) func(c *gin.Context) {
-	return func(c *gin.Context) {
+func wrapper(handler gin.HandlerFunc) gin.HandlerFunc {
 
+	return func(c *gin.Context) {
 		// 截取报文输出日志
 		cp := c.Copy()
 		go func() {
-			println(cp.Request.URL.Path)
-			println("协程输出：" + cp.Request.URL.RawQuery)
+			logrus.Info("协程输出：" + cp.Request.URL.Path)
+			logrus.Info("协程输出：" + cp.Request.URL.RawQuery)
 
 			if !strings.EqualFold(cp.Request.Method, "GET") {
 				// cp.Request.Body.Read()
@@ -33,14 +34,22 @@ func Wrapper(handler ex.HandlerFunc) func(c *gin.Context) {
 
 		}()
 
-		if err := handler(c); err != nil {
-			// 捕获错误
-			switch ex := err.(type) {
-			case *ex.ParamErrException:
-				c.JSON(500, util.Result(util.FAILED, ex.Msg, nil))
-			default:
-				c.JSON(500, util.Result(util.FAILED, "unknown exception.", nil))
+		defer func() {
+			if err := recover(); err != nil {
+				// 捕获错误
+				switch e := err.(type) {
+				case *ex.ParamErrException:
+					logrus.Error(e.Msg)
+					c.JSON(500, util.Result(util.FAILED, e.Msg, nil))
+				case *ex.DataNullException:
+					logrus.Error(e.Msg)
+					c.JSON(500, util.Result(util.FAILED, e.Msg, nil))
+				default:
+					c.JSON(500, util.Result(util.FAILED, "unknown exception.", nil))
+				}
 			}
-		}
+		}()
+
+		handler(c)
 	}
 }

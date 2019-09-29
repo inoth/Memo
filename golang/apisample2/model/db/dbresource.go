@@ -27,7 +27,9 @@ func Instance() *DbConnect {
 }
 
 func (dbc *DbConnect) InitDb() bool {
-	dbc.Db, dbc.Err = gorm.Open("mysql", "inoth:inoth123@(192.168.146.128:3306)/inoth_local?charset=utf8")
+	// inoth:inoth123@(192.168.146.128:3306)/inoth_local?charset=utf8
+	// root:persona123@(10.104.10.95:3306)/testdb?charset=utf8
+	dbc.Db, dbc.Err = gorm.Open("mysql", "root:persona123@(10.104.10.95:3306)/testdb?charset=utf8")
 	if dbc.Err != nil {
 		dbc.Db.Close()
 		return false
