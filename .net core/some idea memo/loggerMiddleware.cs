@@ -1,22 +1,26 @@
 public class LoggerMiddle
 {
     private readonly RequestDelegate _next;
-    public LoggerMiddle(RequestDelegate next) => this._next = next;
+        public LoggerMiddle(RequestDelegate next) => this._next = next;
 
-    private Logger log = LogManager.GetLogger("logger");
+        private Logger log = LogManager.GetLogger("logger");
 
-    public async Task InvokeAsync(HttpContext context)
-    {
-        log.Info($"请求路径：{context.Request.Path + context.Request.QueryString.Value}");
-
-        if (!context.Request.Method.Equals("GET"))
+        public async Task InvokeAsync(HttpContext context)
         {
-            using (var data = new MemoryStream())
+            Thread.CurrentThread.Name = CommFunc.GenerateShortGuid();
+
+            log.Info($"请求路径：{context.Request.Path + context.Request.QueryString.Value}");
+
+            if (!context.Request.Method.Equals("GET"))
             {
-                await context.Request.Body.CopyToAsync(data);
-                log.Info($"请求 body：{Encoding.Default.GetString(data.ToArray())}");
+                context.Request.EnableBuffering();
+                using (var data = new StreamReader(context.Request.Body, Encoding.UTF8, false, 1024, true))
+                {
+                    var body = await data.ReadToEndAsync();
+                    log.Info($"请求 body：{body.Replace("\n","").Trim()}");
+                    context.Request.Body.Seek(0, SeekOrigin.Begin);
+                }
             }
+            await _next(context);
         }
-        await _next(context);
-    }
 }
