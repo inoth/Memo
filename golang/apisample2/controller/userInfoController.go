@@ -25,5 +25,7 @@ func QueryUserList(c *gin.Context) {
 
 func SelfError(c *gin.Context) {
 	logrus.Info("控制器输出")
+	logrus.Info(c.PostForm("id"))
 	panic(ex.ParamErrorException("参数错误"))
+	panic(ex.ParamErrorException("参数错误2"))
 }

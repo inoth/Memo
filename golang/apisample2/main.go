@@ -16,5 +16,6 @@ func main() {
 	util.InitLog()
 
 	r := router.InitRouter()
+
 	r.Run(":8080")
 }

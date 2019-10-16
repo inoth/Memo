@@ -11,7 +11,7 @@ import (
 // var log *logrus.Entry
 
 func InitLog() {
-	logrus.SetFormatter(&logrus.JSONFormatter{})
+	logrus.SetFormatter(&logrus.TextFormatter{})
 	logrus.SetReportCaller(true)
 	logrus.SetOutput(os.Stdout)
 	logrus.SetOutput(&lumberjack.Logger{
