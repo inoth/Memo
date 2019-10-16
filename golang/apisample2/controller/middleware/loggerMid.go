@@ -10,11 +10,7 @@ import (
 func LoggerInit(c *gin.Context) {
 	cp := c.Copy()
 	go func() {
-		defer func() {
-			if err := recover(); err != nil {
-				logrus.Errorf("%v", err)
-			}
-		}()
+		defer InoCalm()
 
 		logrus.Info("协程输出：" + cp.Request.URL.Path)
 		logrus.Info("协程输出：" + cp.Request.URL.RawQuery)

@@ -27,3 +27,11 @@ func ExceptionHandle(c *gin.Context) {
 	}()
 	c.Next()
 }
+
+func InoCalm() {
+	id := util.GenerateID()
+	logrus.Infof("[%s] error start!", id)
+	if err := recover(); err != nil {
+		logrus.Errorf("[%s]%v", id, err)
+	}
+}
