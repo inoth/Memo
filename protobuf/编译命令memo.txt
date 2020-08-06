@@ -1,5 +1,8 @@
 protoc -I=$SRC_DIR --csharp_out=$DST_DIR $SRC_DIR/demo.proto
 
-$SRC_DIR: proto 文件目录 [引用其他该文件需要用到]
-$DST_DIR: 编译文件输出目录
+$SRC_DIR: proto 鏂囦欢鐩綍 [寮曠敤鍏朵粬璇ユ枃浠堕渶瑕佺敤鍒癩
+$DST_DIR: 缂栬瘧鏂囦欢杈撳嚭鐩綍
 
+
+go 鐢熸垚鍛戒护
+protoc -I=$SRC_DIR --go_out=plugins=grpc:$DST_DIR $SRC_DIR/wechat.proto
